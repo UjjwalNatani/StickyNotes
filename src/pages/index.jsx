@@ -14,7 +14,7 @@ export default function Home() {
 
   const fetchStickyNotes = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/');
+      const response = await axios.get('https://stickynotes-sdp5.onrender.com');
       setStickyNotes(response.data);
     } catch (error) {
       console.error('Error fetching sticky notes:', error);
@@ -27,7 +27,7 @@ export default function Home() {
 
   const addStickyNote = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/', { content: newNoteContent, x: 0, y: 0 });
+      const response = await axios.post('https://stickynotes-sdp5.onrender.com', { content: newNoteContent, x: 0, y: 0 });
       const newNote = { _id: response.data._id, content: newNoteContent, x: Math.random() * 400, y: Math.random() * 400 };
       setStickyNotes(prevNotes => [...prevNotes, newNote]);
       setNewNoteContent('');
@@ -38,7 +38,7 @@ export default function Home() {
 
   const deleteStickyNote = async (id) => {
     try { 
-      await axios.delete(`http://localhost:5000/${id}`);
+      await axios.delete(`https://stickynotes-sdp5.onrender.com/${id}`);
       setStickyNotes(prevNotes => prevNotes.filter(note => note._id !== id));
     } catch (error) {
       alert('Error deleting sticky note:', error);
@@ -51,7 +51,7 @@ export default function Home() {
 
   const saveNote = async (id, updatedContent, x, y) => {
     try {
-      await axios.put(`http://localhost:5000/${id}`, { content: updatedContent, x, y });
+      await axios.put(`https://stickynotes-sdp5.onrender.com/${id}`, { content: updatedContent, x, y });
       setStickyNotes(prevNotes =>
         prevNotes.map(note =>
           note._id === id ? { ...note, content: updatedContent, x, y } : note
